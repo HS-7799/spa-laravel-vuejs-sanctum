@@ -1,6 +1,6 @@
 <template>
-  <footer>
-      This the footer
+  <footer >
+      <p class="mt-5 mb-3 text-muted">All rights are deserved &copy; 2017–2021</p>
   </footer>
 </template>
 
@@ -12,4 +12,9 @@ export default {
 
 <style>
 
+footer
+{
+  position: absolute;
+  bottom: 0;
+}
 </style>
