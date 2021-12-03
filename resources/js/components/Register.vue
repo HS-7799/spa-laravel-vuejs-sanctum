@@ -1,22 +1,22 @@
 <template>
     <div>
-       <form>
+       <form @submit.prevent="registerUser" >
             <h1 class="h3 mb-3 fw-normal">Please sign up</h1>
 
             <div class="form-floating">
-                <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com">
+                <input type="text" class="form-control" v-model="form.name" id="floatingInput" placeholder="Name" name="name">
                 <label for="floatingInput">Name</label>
             </div>
             <div class="form-floating">
-                <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+                <input type="email" class="form-control" v-model="form.email" id="floatingInput" placeholder="name@example.com" name="email" >
                 <label for="floatingInput">Email address</label>
             </div>
             <div class="form-floating">
-                <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
+                <input type="password" class="form-control" v-model="form.password" id="floatingPassword" placeholder="Password" name="password" >
                 <label for="floatingPassword">Password</label>
             </div>
             <div class="form-floating">
-                <input type="password" class="form-control" id="floatingPasswordConfirmation" placeholder="Password confirmation">
+                <input type="password" class="form-control" v-model="form.password_confirmation" id="floatingPasswordConfirmation" placeholder="Password confirmation" name="password_confirmation" >
                 <label for="floatingPasswordConfirmation">Password confirmation</label>
             </div>
 
@@ -30,6 +30,29 @@
         </form>
     </div>
 </template>
+
+<script>
+
+export default {
+    data()
+    {
+        return {
+            form : {
+                name : null,
+                email : null,
+                password : null,
+                password_confirmation : null
+            }
+        }
+    },
+    methods : {
+        registerUser()
+        {
+            console.log(this.form);
+        }
+    }
+}
+</script>
 
 
 <style>
