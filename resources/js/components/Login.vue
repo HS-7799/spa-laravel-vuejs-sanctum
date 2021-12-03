@@ -24,6 +24,7 @@
 </template>
 
 <script>
+import axios from "axios"
 export default {
     data()
     {
@@ -33,6 +34,12 @@ export default {
                 password : null
             }
         }
+    },
+    created()
+    {
+        axios.get('/sanctum/csrf-cookie').then(response => {
+            
+        });
     },
     methods : {
         loginUser()
