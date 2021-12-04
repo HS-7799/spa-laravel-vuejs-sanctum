@@ -61,10 +61,11 @@ class PostController extends Controller
      */
     public function update(UpdatePostRequest $request, Post $post)
     {
-        $this->authorize('update', Post::class);
+        $this->authorize('update', $post);
         $post->title = $request->title;
         $post->body = $request->body;
         $post->save();
+        return $post;
     }
 
     /**
@@ -75,7 +76,7 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        $this->authorize('delete', Post::class);
+        $this->authorize('delete', $post);
         return $post->delete();
     }
 }

@@ -68,9 +68,16 @@ export default {
             axios.post('/login',this.form).then(response => {
                 this.errors = {}
                 this.$store.dispatch('setLoggedIn',true)
+                this.getUser()
                 this.$router.push('/dashboard')
             }).catch(errors => {
                 this.errors = errors.response.data.errors
+            })
+        },
+        getUser()
+        {
+            axios.get('/api/user').then(response => {
+                this.$store.dispatch('setAuthUser',response.data)
             })
         }
     }

@@ -1,5 +1,8 @@
 <template>
   <div>
+        <div v-if="posts.length == 0" >
+            No post available, please create a post
+        </div>
         <div v-for="post,index in posts" v-bind:key="index" >
             <h3>
                 <router-link :to="'/posts/' + post.id">{{ post.title }}</router-link>

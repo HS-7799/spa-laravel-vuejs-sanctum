@@ -9,6 +9,7 @@ import Register from '../components/Register.vue'
 import AllPosts from '../components/posts/AllPosts.vue'
 import ShowPost from '../components/posts/ShowPost.vue'
 import CreatePost from '../components/posts/CreatePost.vue'
+import EditPost from '../components/posts/EditPost.vue'
 
 const routes = [
     { path : '/', component : Welcome  },
@@ -17,6 +18,7 @@ const routes = [
     { path : '/register', component : Register  },
     { path : '/posts', component : AllPosts  },
     { path : '/posts/create', component : CreatePost  },
+    { path : '/posts/:id/edit', component : EditPost, name : 'editPost'  },
     { path : '/posts/:id', component : ShowPost  },
 ]
 

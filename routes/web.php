@@ -15,5 +15,6 @@ use Illuminate\Support\Facades\Route;
 
 Route::view('/', 'welcome');
 Route::view('/{any}', 'welcome');
-Route::view('/{any}/{a}', 'welcome');
+Route::view('/{any1}/{any2}', 'welcome');
+Route::view('/{any1}/{any2}/{any3}', 'welcome');
 

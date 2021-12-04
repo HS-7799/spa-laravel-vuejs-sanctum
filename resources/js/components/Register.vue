@@ -79,6 +79,7 @@ export default {
                     password : null,
                     password_confirmation : null
                 }
+                this.$store.dispatch('setLoggedIn',true)
                 this.$router.push('/dashboard')
             }).catch(errors => {
                 this.errors = errors.response.data.errors

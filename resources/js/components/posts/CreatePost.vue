@@ -52,6 +52,7 @@ export default {
             axios.post('/api/posts',this.form).then(response => {
                 this.form.title = null
                 this.form.body = null
+                this.$router.push('/posts')
             }).catch(errors => {
                 if(errors.response.status == 401)
                 {

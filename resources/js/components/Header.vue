@@ -50,6 +50,7 @@ export default {
       {
         axios.post('/logout').then(response => {
           this.$store.dispatch('setLoggedIn',false)
+          this.$store.dispatch('setAuthUser',null)
           this.$router.push('/')
         }).catch(errors => {
           console.log(errors.response.data);
