@@ -2,21 +2,25 @@
     <div>
        <form @submit.prevent="registerUser" >
             <h1 class="h3 mb-3 fw-normal">Please sign up</h1>
-
+            <ul>
+                <li v-for="error,index in errors" v-bind:key="index" >
+                    {{ error[0] }}
+                </li>
+            </ul>
             <div class="form-floating">
-                <input type="text" class="form-control" v-model="form.name" id="floatingInput" placeholder="Name" name="name">
+                <input type="text" class="form-control" v-model="form.name" id="floatingInput" placeholder="Name">
                 <label for="floatingInput">Name</label>
             </div>
             <div class="form-floating">
-                <input type="email" class="form-control" v-model="form.email" id="floatingInput" placeholder="name@example.com" name="email" >
+                <input type="email" class="form-control" v-model="form.email" id="floatingInput" placeholder="name@example.com" >
                 <label for="floatingInput">Email address</label>
             </div>
             <div class="form-floating">
-                <input type="password" class="form-control" v-model="form.password" id="floatingPassword" placeholder="Password" name="password" >
+                <input type="password" class="form-control" v-model="form.password" id="floatingPassword" placeholder="Password" >
                 <label for="floatingPassword">Password</label>
             </div>
             <div class="form-floating">
-                <input type="password" class="form-control" v-model="form.password_confirmation" id="floatingPasswordConfirmation" placeholder="Password confirmation" name="password_confirmation" >
+                <input type="password" class="form-control" v-model="form.password_confirmation" id="floatingPasswordConfirmation" placeholder="Password confirmation" >
                 <label for="floatingPasswordConfirmation">Password confirmation</label>
             </div>
 
@@ -32,6 +36,7 @@
 </template>
 
 <script>
+import axios from 'axios';
 
 export default {
     data()
@@ -42,13 +47,30 @@ export default {
                 email : null,
                 password : null,
                 password_confirmation : null
-            }
+            },
+            errors : {}
         }
+    },
+    created()
+    {
+        axios.get('/sanctum/csrf-cookie').then(response => {
+            console.log(response);
+        });
     },
     methods : {
         registerUser()
         {
-            console.log(this.form);
+            axios.post('/register',this.form).then(response => {
+                this.errors = {}
+                this.form = {
+                name : null,
+                email : null,
+                password : null,
+                password_confirmation : null
+            }
+            }).catch(errors => {
+                this.errors = errors.response.data.errors
+            })
         }
     }
 }
@@ -59,5 +81,9 @@ export default {
 .form-floating
 {
     margin: 10px;
+}
+ul li
+{
+    color: red;
 }
 </style>
