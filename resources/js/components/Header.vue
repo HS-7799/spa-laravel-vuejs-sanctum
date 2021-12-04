@@ -7,7 +7,13 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarCollapse">
       <ul class="navbar-nav me-auto mb-2 mb-md-0">
+        <li class="nav-item">
+            <router-link to="/posts" class="nav-link" >Posts</router-link>
+          </li>
         <template v-if="getLoggedIn" >
+          <li class="nav-item">
+            <router-link to="/posts/create" class="nav-link" >Add post</router-link>
+          </li>
           <li class="nav-item">
             <router-link to="/dashboard" class="nav-link" >dashboard</router-link>
           </li>

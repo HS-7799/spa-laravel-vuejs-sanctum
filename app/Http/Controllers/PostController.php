@@ -8,6 +8,12 @@ use App\Http\Requests\UpdatePostRequest;
 
 class PostController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth:sanctum')->except(['index','show']);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -27,6 +33,7 @@ class PostController extends Controller
      */
     public function store(StorePostRequest $request)
     {
+        $this->authorize('create', Post::class);
         $post = new Post();
         $post->title = $request->title;
         $post->body = $request->body;
@@ -54,6 +61,7 @@ class PostController extends Controller
      */
     public function update(UpdatePostRequest $request, Post $post)
     {
+        $this->authorize('update', Post::class);
         $post->title = $request->title;
         $post->body = $request->body;
         $post->save();
@@ -67,6 +75,7 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
+        $this->authorize('delete', Post::class);
         return $post->delete();
     }
 }
