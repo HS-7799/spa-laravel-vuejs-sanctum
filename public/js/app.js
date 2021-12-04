@@ -2199,10 +2199,26 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapGetters)(['getLoggedIn']))
+  computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapGetters)(['getLoggedIn'])),
+  methods: {
+    logout: function logout() {
+      var _this = this;
+
+      axios__WEBPACK_IMPORTED_MODULE_0___default().post('/logout').then(function (response) {
+        _this.$store.dispatch('setLoggedIn', false);
+
+        _this.$router.push('/');
+      })["catch"](function (errors) {
+        console.log(errors.response.data);
+      });
+    }
+  }
 });
 
 /***/ }),
@@ -21329,6 +21345,30 @@ var render = function () {
                 ],
                 2
               ),
+              _vm._v(" "),
+              _vm.getLoggedIn
+                ? _c(
+                    "form",
+                    {
+                      on: {
+                        submit: function ($event) {
+                          $event.preventDefault()
+                          return _vm.logout.apply(null, arguments)
+                        },
+                      },
+                    },
+                    [
+                      _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-outline-success",
+                          attrs: { type: "submit" },
+                        },
+                        [_vm._v("Logout")]
+                      ),
+                    ]
+                  )
+                : _vm._e(),
             ]
           ),
         ],

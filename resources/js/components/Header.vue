@@ -21,6 +21,9 @@
           </li>
         </template>
       </ul>
+      <form @submit.prevent="logout" v-if="getLoggedIn" >
+        <button class="btn btn-outline-success" type="submit">Logout</button>
+      </form>
     </div>
   </div>
 </nav>
@@ -35,6 +38,17 @@ export default {
       ...mapGetters([
         'getLoggedIn'
       ])
+    },
+    methods : {
+      logout()
+      {
+        axios.post('/logout').then(response => {
+          this.$store.dispatch('setLoggedIn',false)
+          this.$router.push('/')
+        }).catch(errors => {
+          console.log(errors.response.data);
+        })
+      }
     }
 }
 </script>
