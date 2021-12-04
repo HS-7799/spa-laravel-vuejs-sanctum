@@ -63,11 +63,12 @@ export default {
             axios.post('/register',this.form).then(response => {
                 this.errors = {}
                 this.form = {
-                name : null,
-                email : null,
-                password : null,
-                password_confirmation : null
-            }
+                    name : null,
+                    email : null,
+                    password : null,
+                    password_confirmation : null
+                }
+                this.$router.push('/dashboard')
             }).catch(errors => {
                 this.errors = errors.response.data.errors
             })

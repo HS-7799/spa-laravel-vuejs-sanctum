@@ -54,7 +54,8 @@ export default {
         loginUser()
         {
             axios.post('/login',this.form).then(response => {
-                console.log(response);
+                this.errors = {}
+                this.$router.push('/dashboard')
             }).catch(errors => {
                 this.errors = errors.response.data.errors
             })
