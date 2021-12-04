@@ -37,7 +37,7 @@
 
 <script>
 import axios from 'axios';
-
+import { mapGetters } from 'vuex'
 export default {
     data()
     {
@@ -51,11 +51,22 @@ export default {
             errors : {}
         }
     },
+    computed : {
+        ...mapGetters([
+            'getLoggedIn'
+        ])
+    },
     created()
     {
-        axios.get('/sanctum/csrf-cookie').then(response => {
-            console.log(response);
-        });
+        if(this.getLoggedIn == true)
+        {
+            this.$router.push('/dashboard')
+        }
+        else {
+            axios.get('/sanctum/csrf-cookie').then(response => {
+                console.log("csrf token in a cookie in session");
+            });
+        }
     },
     methods : {
         registerUser()

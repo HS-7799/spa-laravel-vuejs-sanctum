@@ -33,6 +33,7 @@
 
 <script>
 import axios from "axios"
+import {mapGetters} from 'vuex'
 export default {
     data()
     {
@@ -44,17 +45,29 @@ export default {
             errors : {}
         }
     },
+    computed : {
+        ...mapGetters([
+            'getLoggedIn'
+        ])
+    },
     created()
     {
-        axios.get('/sanctum/csrf-cookie').then(response => {
-            console.log("csef token in a cookie in session");
-        });
+        if(this.getLoggedIn == true)
+        {
+            this.$router.push('/dashboard')
+        }
+        else {
+            axios.get('/sanctum/csrf-cookie').then(response => {
+                console.log("csef token in a cookie in session");
+            });
+        }
     },
     methods : {
         loginUser()
         {
             axios.post('/login',this.form).then(response => {
                 this.errors = {}
+                this.$store.dispatch('setLoggedIn',true)
                 this.$router.push('/dashboard')
             }).catch(errors => {
                 this.errors = errors.response.data.errors
