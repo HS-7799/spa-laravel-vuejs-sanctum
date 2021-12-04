@@ -5,11 +5,13 @@ Vue.use(Vuex)
 
 
 import user from './user.js'
+import post from './post.js'
 
 
 const store = new Vuex.Store({
     modules : {
-        user
+        user,
+        post
     },
     plugins: [createPersistedState()]
 })

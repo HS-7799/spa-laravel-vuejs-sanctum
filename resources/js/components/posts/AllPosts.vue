@@ -13,17 +13,18 @@
 
 <script>
 import axios from 'axios'
+import { mapGetters } from 'vuex'
 export default {
-    data()
-    {
-        return {
-            posts : []
-        }
+    
+    computed : {
+        ...mapGetters({
+            posts : 'allPosts'
+        })
     },
     created()
     {
         axios.get('/api/posts').then(response => {
-            this.posts = response.data
+            this.$store.dispatch('setPosts',response.data)
         }).catch(errors => {
             console.log(errors.response.data);
         })

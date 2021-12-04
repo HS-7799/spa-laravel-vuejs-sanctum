@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import axios from "axios"
+import {mapGetters} from 'vuex';
 export default {
     data()
     {
@@ -15,11 +15,16 @@ export default {
         
         }
     },
+    computed : {
+        ...mapGetters([
+            'allPosts',
+            'getOnePost'
+        ])
+    },
     created()
     {
-        axios.get(`/api/posts/${this.$route.params.id}`).then(response => {
-            this.post = response.data
-        })
+        this.post = this.getOnePost(this.$route.params.id)
+
     }
 
 }
